@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://testEntityBrowse.caption"
+        focusComponent="testEntitiesTable"
+        messagesPack="com.company.untitled.web.screens.testentity">
+    <data readOnly="true">
+        <collection id="testEntitiesDc"
+                    class="com.company.untitled.entity.TestEntity">
+            <view extends="_local"/>
+            <loader id="testEntitiesDl">
+                <query>
+                    <![CDATA[select e from untitled_TestEntity e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="testEntitiesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="testEntitiesTable"
+                dataLoader="testEntitiesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="testEntitiesTable"
+                    width="100%"
+                    dataContainer="testEntitiesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="testEntitiesTable.create"/>
+                <button id="editBtn" action="testEntitiesTable.edit"/>
+                <button id="removeBtn" action="testEntitiesTable.remove"/>
+                <button id="refreshBtn" action="testEntitiesTable.refresh"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
